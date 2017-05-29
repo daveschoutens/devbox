@@ -2,27 +2,27 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "devbox"
+  config.vm.box = "file://packer/builds/devbox.box"
 
-  config.vm.hostname "devbox"
+  config.vm.hostname = "devbox"
 
   config.vm.provider "virtualbox" do |vb|
     # Name of our VM
-    v.name = "DevBox"
+    vb.name = "DevBox"
     # Configure the basics
-    v.cpus = 2
-    v.memory = 2048
+    vb.cpus = 2
+    vb.memory = 2048
     # Display the VirtualBox GUI when booting the machine
-    v.gui = true
+    vb.gui = true
     # Configure other GUI-related nonsense
-    v.customize ["modifyvm", :id, "--vram", "256"]
-    v.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
-    v.customize ["setextradata", :id, "CustomVideoMode1", "1024x768x32"]
-    v.customize ["modifyvm", :id, "--ioapic", "on"]
-    v.customize ["modifyvm", :id, "--rtcuseutc", "on"]
-    v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--vram", "256"]
+    vb.customize ["setextradata", "global", "GUI/MaxGuestResolution", "any"]
+    vb.customize ["setextradata", :id, "CustomVideoMode1", "1024x768x32"]
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+    vb.customize ["modifyvm", :id, "--rtcuseutc", "on"]
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
     # NOTE: Try setting the following to "off" if running into problems with Chrome rendering
-    v.customize ["modifyvm", :id, "--accelerate3d", "on"]
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
   end
 
   config.vm.network "private_network", ip: "10.10.20.10"
@@ -41,9 +41,9 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
   # config.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
 
-  config.vm.provision "ansible" do |ansible|
+  config.vm.provision "ansible_local" do |ansible|
     ansible.playbook = "ansible/devbox.yml"
-    ansible.host_key_checking = false
+    # ansible.host_key_checking = false
   end
   # PROVISION END
 
