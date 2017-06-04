@@ -1,19 +1,9 @@
 {
   "provisioners": [
     {
-      "type": "file",
-      "source": "files/motd",
-      "destination": "/tmp/motd"
-    },
-    {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/setup.sh"
-    },
-    {
-      "type": "shell",
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
-      "script": "scripts/install.sh"
     },
     {
       "type": "shell",
@@ -22,7 +12,7 @@
     },
     {
       "type": "ansible-local",
-      "galaxy_file": "ansible/galaxy-requirements.yml",
+      "playbook_dir": "ansible",
       "playbook_file": "ansible/main.yml",
       "staging_directory": "/packer/provisioner-ansible-local",
       "extra_arguments": ["--connection=local -vvvv"]
@@ -77,7 +67,7 @@
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "devbox",
+      "vm_name": "devbox-build",
       "vboxmanage": [
         [
           "modifyvm",
@@ -96,7 +86,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/devbox.box",
+      "output": "builds/devbox-build.box",
       "type": "vagrant"
     }
   ]

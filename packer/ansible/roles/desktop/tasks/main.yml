@@ -1,0 +1,11 @@
+---
+- name: Desktop Environment
+  apt: "name=xubuntu-desktop state=installed"
+
+- name: Auto-login for Vagrant user
+  copy:
+    src: lightdm-vagrant-autologin
+    dest: /etc/lightdm/lightdm.conf.d/10-xubuntu.conf
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,72 @@
+---
+# Package updates / upgrades
+- name: Ensure distribution is fully up-to-date
+  shell: apt-get -y upgrade && apt-get -y dist-upgrade
+
+- name: Ensure correct kernel headers are installed.
+  shell: "apt-get -y install linux-headers-$(uname -r)"
+
+- name: Ensure correct kernel extra are installed.
+  shell: "apt-get -y install linux-image-extra-$(uname -r)"
+
+- name: Ensure apt cache is updated.
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Disable automatic apt get updates (prevents pain during Vagrant provisioning)
+  shell: systemctl disable  {{item}}
+  with_items:
+    - apt-daily
+    - apt-daily.service
+    - apt-daily.timer
+
+# Basics: Setup time & timezone
+- name: Set timezone to UTC
+  when: ansible_date_time.tz != 'UTC'
+  command: timedatectl set-timezone UTC
+
+- name: Ensure ntp is installed
+  apt: name=ntp state=installed
+
+- name: Enable ntp service
+  service: >
+    name=ntp
+    enabled=yes
+    state=started
+
+# SSH daemon configuration.
+- name: Configure SSH daemon.
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  with_items:
+    - regexp: '^UseDNS'
+      line: 'UseDNS no'
+    - regexp: '^GSSAPIAuthentication'
+      line: 'GSSAPIAuthentication no'
+
+# Vagrant SSH configuration.
+- name: Configure vagrant .ssh directory.
+  file:
+    path: /home/vagrant/.ssh
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: 0700
+
+- name: Get vagrant's public key.
+  get_url:
+    url: https://github.com/mitchellh/vagrant/raw/master/keys/vagrant.pub
+    dest: /home/vagrant/.ssh/authorized_keys
+    owner: vagrant
+    group: vagrant
+    mode: 0600
+
+# VirtualBox tools installation.
+- name: Check if VirtualBox is running the guest VM.
+  stat: path=/home/vagrant/.vbox_version
+  register: virtualbox_check
+
+- include: virtualbox.yml
+  when: virtualbox_check.stat.exists
