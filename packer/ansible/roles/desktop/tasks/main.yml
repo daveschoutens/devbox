@@ -1,11 +1,23 @@
 ---
 - name: Desktop Environment
-  apt: "name=xubuntu-desktop state=installed"
+  apt: name={{ item }} state=installed
+  with_items:
+    - xfce4
+    - xserver-xorg-legacy
+    - lightdm
+  become: true
 
-- name: Auto-login for Vagrant user
+- name: Allow anyone to run desktop environment
+  lineinfile:
+    dest: /etc/X11/Xwrapper.config
+    regexp: "allowed_users="
+    line: "allowed_users=anybody"
+    state: present
+
+- name: Auto-login for Vagrant user (LightDM)
   copy:
     src: lightdm-vagrant-autologin
-    dest: /etc/lightdm/lightdm.conf.d/10-xubuntu.conf
+    dest: /etc/lightdm/lightdm.conf.d/10-autologin.conf
     owner: root
     group: root
     mode: 0644

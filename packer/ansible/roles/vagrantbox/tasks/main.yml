@@ -13,7 +13,7 @@
   apt: update_cache=yes cache_valid_time=3600
 
 - name: Disable automatic apt get updates (prevents pain during Vagrant provisioning)
-  shell: systemctl disable  {{item}}
+  shell: systemctl disable {{item}}
   with_items:
     - apt-daily
     - apt-daily.service

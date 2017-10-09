@@ -4,6 +4,6 @@
   gather_facts: yes
 
   roles:
-    - desktop
+    # - desktop
     - vagrantbox
     - devbox
