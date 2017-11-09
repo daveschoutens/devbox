@@ -68,5 +68,5 @@
   stat: path=/home/vagrant/.vbox_version
   register: virtualbox_check
 
-- include: virtualbox.yml
+- include_tasks: virtualbox.yml
   when: virtualbox_check.stat.exists

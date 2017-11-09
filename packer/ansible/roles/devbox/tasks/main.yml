@@ -5,38 +5,16 @@
     src: motd
     dest: /etc/motd
 
-# Docker installation
-- name: Ensure we got docker apt repo
-  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-xenial main' state=present
-
-- name: Ensure we got docker gpg key
-  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
-
-- name: Ensure apt cache is updated.
-  apt: update_cache=yes
-
-- name: Ensure docker is installed
-  apt: name=docker-engine force=yes state=present
-
-- name: Add vagrant to docker group
-  user: name=vagrant groups=docker append=yes
-
-# Kubernetes!
-# - name: Ensure kubectl is installed
-#   get_url: url=http://storage.googleapis.com/kubernetes-release/release/v1.2.4/bin/linux/amd64/kubectl dest=/usr/bin/kubectl mode=0755
-#
-# - name: Ensure kargo is installed
-#   pip: name=kargo
-
 - name: Other software we want
-  apt: "name={{ item }} state=installed"
+  apt:
+    name: "{{ item }}"
+    state: present
   with_items:
     - apt-transport-https
     - ca-certificates
     - git
     - wget
     - curl
-    - vim
     - zsh
     - htop
     - tmux
