@@ -1,0 +1,6 @@
+---
+- name: apt | Subversion
+  apt:
+    name: svn
+    state: present
+  become: yes

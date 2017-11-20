@@ -1,0 +1,7 @@
+---
+- name: copy | /home/vagrant/.zshrc 
+  copy: src=files/zshrc dest=/home/vagrant/.zshrc
+
+- name: user | Set vagrant shell to zsh
+  user: name=vagrant shell=/bin/zsh
+  become: yes

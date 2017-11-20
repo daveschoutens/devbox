@@ -1,0 +1,6 @@
+---
+- name: apt | Java (openjdk-8-jdk)
+  apt:
+    name: openjdk-8-jdk
+    state: present
+  become: yes

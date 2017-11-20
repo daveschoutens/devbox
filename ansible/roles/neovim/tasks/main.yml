@@ -1,0 +1,12 @@
+---
+- name: apt repository | neovim
+  apt_repository:
+    repo: 'ppa:neovim-ppa/stable'
+    update_cache: yes
+  become: yes
+
+- name: apt | neovim
+  apt:
+    name: neovim
+    state: present
+  become: yes

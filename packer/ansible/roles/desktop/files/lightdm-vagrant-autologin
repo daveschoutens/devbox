@@ -1,6 +1,5 @@
 [SeatDefaults]
 autologin-user=vagrant
 autologin-user-timeout=0
-# Check https://bugs.launchpad.net/lightdm/+bug/854261 before setting a timeout
-user-session=Lubuntu
+user-session=LXDE
 greeter-session=lightdm-gtk-greeter

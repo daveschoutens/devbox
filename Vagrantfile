@@ -2,7 +2,6 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  # config.vm.box = "file://packer/builds/devbox-build.box"
   config.vm.box = "devbox"
 
   config.vm.hostname = "devbox"
@@ -43,7 +42,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "file", source: "~/.gitconfig", destination: "~/.gitconfig"
 
   config.vm.provision "ansible_local" do |ansible|
-    ansible.playbook = "ansible/devbox.yml"
+    ansible.playbook = "ansible/site.yml"
     # ansible.host_key_checking = false
   end
   # PROVISION END

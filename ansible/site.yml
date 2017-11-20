@@ -1,0 +1,14 @@
+---
+# This playbook provisions a DevBox for a specific purpose
+
+- hosts: all
+
+  roles:
+    - zsh
+    - chrome
+    - neovim
+    - nvm
+    - java
+    - maven
+    - vscode
+    - svn

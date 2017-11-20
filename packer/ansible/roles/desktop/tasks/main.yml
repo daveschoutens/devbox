@@ -1,13 +1,11 @@
 ---
-- name: Desktop Environment
+- name: Desktop Environment - Xorg Legacy w/LXDE
   apt:
     name: "{{ item }}"
     state: present
   with_items:
     - xserver-xorg-legacy
-    - lightdm
     - lxde
-  become: true
 
 - name: Allow anyone to run desktop environment
   lineinfile:
@@ -15,7 +13,6 @@
     regexp: "allowed_users="
     line: "allowed_users=anybody"
     state: present
-  become: true
 
 - name: Auto-login for Vagrant user (LightDM)
   copy:
@@ -24,4 +21,3 @@
     owner: root
     group: root
     mode: 0644
-  become: true

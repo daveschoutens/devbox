@@ -1,5 +1,4 @@
 ---
-# Terminal fun
 - name: Custom shell login splash
   copy:
     src: motd
@@ -19,3 +18,5 @@
     - htop
     - tmux
     - tree
+    - emacs
+
