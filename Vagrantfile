@@ -2,13 +2,13 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "devbox"
+  config.vm.box = "devbox-11-20"
 
   config.vm.hostname = "devbox"
 
   config.vm.provider "virtualbox" do |vb|
     # Name of our VM
-    vb.name = "DevBox-New"
+    vb.name = "DevBox"
     # Configure the basics
     vb.cpus = 2
     vb.memory = 2048
