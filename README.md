@@ -12,20 +12,20 @@ $ vagrant box add devbox packer/builds/devbox.box
 $ vagrant up
 ```
 
-# Provisioning: Stuff to fix
-[] node isn't installed (though nvm is)
-[] locale / encoding issues need fixing
+# Provisioning: Project-specific stuff to add
+[ ] Install an IDE w/ project-specific settings included (Eclipse or IntelliJ)
 
-# Provisioning: Stuff to add
-[] Custom background
-[] Links / launcher for common apps (Code, Chrome, Terminal)
-[] Install an IDE w/ project-specific settings included (Eclipse or IntelliJ)
-[] Checkout project automatically (?)
-[] Install necessary global NPM modules (@angular/cli, typings, etc)
-[] Anything else necessary to jump right in and do a full build w/ local deploy
-[] Setup Git name / email via Ansible
-[] Install proper .m2 settings, including encrypted passwords (if possible)
-[] Setup preconfigured SSH key if available (avoids need to recreate or manually setup after fresh provision)
+[ ] Install necessary global NPM modules (@angular/cli, etc)
+
+[ ] Install .m2 settings template
+
+# Provisioning: User-specific stuff to add (configuration-driven)
+
+[ ] Setup Git name / email, if configured (shouldn't be checked-in)
+
+[ ] Encrypted passwords installed in .m2 settings file (definitely shouldn't be checked in)
+
+[ ] Install SSH key pair (avoids need to reinstall public SSH key each time VM is rebuilt) (definitely shouldn't be checked in)
 
 # Vagrant: Stuff to add
-[] Forward ports for app
+[ ] Forward ports for app

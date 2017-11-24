@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "devbox-11-20"
+  config.vm.box = "devbox"
 
   config.vm.hostname = "devbox"
 
@@ -29,12 +29,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder '.', '/vagrant'
   config.ssh.forward_agent = true
   # config.ssh.insert_key = true
-
-  # TODO: Put this in Packer's court. Remove all stdin is not a tty errors
-  config.vm.provision "fix-no-tty", type: "shell" do |s|
-    s.privileged = false
-    s.inline = "sudo sed -i '/tty/!s/mesg n/tty -s \\&\\& mesg n/' /root/.profile"
-  end
 
   # PROVISION START
   # config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"

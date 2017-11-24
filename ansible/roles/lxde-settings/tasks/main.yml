@@ -1,0 +1,17 @@
+---
+- name: Desktop Wallpaper
+  copy:
+    src: files/ubuntu-dark.jpg
+    dest: /usr/share/lxde/wallpapers/ubuntu-dark.jpg
+    mode: u=rw,g=r,o=r
+  become: yes
+
+- name: LXDE Desktop Settings
+  copy:
+    src: files/desktop-items-0.conf
+    dest: /home/{{ ansible_user }}/.config/pcmanfm/LXDE/desktop-items-0.conf
+
+- name: LXDE Panel Settings
+  copy:
+    src: files/panel
+    dest: /home/{{ ansible_user }}/.config/lxpanel/LXDE/panels/panel

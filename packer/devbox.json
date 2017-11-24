@@ -86,7 +86,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/devbox-build.box",
+      "output": "builds/devbox.box",
       "type": "vagrant"
     }
   ]

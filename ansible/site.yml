@@ -4,11 +4,15 @@
 - hosts: all
 
   roles:
-    - zsh
-    - chrome
-    - neovim
+    # Project stuff
     - java
     - maven
+    - nvm
+    - chrome
     - vscode
     - svn
-    - nvm
+    # Project DevBox niceties
+    - lxde-settings
+    # User-specific stuff
+    - neovim
+    - zsh
