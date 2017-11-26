@@ -19,13 +19,14 @@ $ vagrant up
 
 [ ] Install .m2 settings template
 
-# Provisioning: User-specific stuff to add (configuration-driven)
 
+# Provisioning: User-specific stuff to add (configuration-driven)
 [ ] Setup Git name / email, if configured (shouldn't be checked-in)
 
 [ ] Encrypted passwords installed in .m2 settings file (definitely shouldn't be checked in)
 
 [ ] Install SSH key pair (avoids need to reinstall public SSH key each time VM is rebuilt) (definitely shouldn't be checked in)
+
 
 # Vagrant: Stuff to add
 [ ] Forward ports for app

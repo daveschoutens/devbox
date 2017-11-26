@@ -4,6 +4,9 @@
 - hosts: all
 
   roles:
+    # User-specific stuff
+    - neovim
+    - zsh
     # Project stuff
     - java
     - maven
@@ -11,8 +14,8 @@
     - chrome
     - vscode
     - svn
-    # Project DevBox niceties
+    # DevBox niceties
     - lxde-settings
-    # User-specific stuff
-    - neovim
-    - zsh
+
+  vars:
+    nvm_node_version: '6.11.3'

@@ -1,5 +1,5 @@
 ---
-- name: Desktop Wallpaper
+- name: Make Desktop Wallpaper available
   copy:
     src: files/ubuntu-dark.jpg
     dest: /usr/share/lxde/wallpapers/ubuntu-dark.jpg
@@ -10,8 +10,10 @@
   copy:
     src: files/desktop-items-0.conf
     dest: /home/{{ ansible_user }}/.config/pcmanfm/LXDE/desktop-items-0.conf
+  notify: 'restart desktop'
 
 - name: LXDE Panel Settings
   copy:
     src: files/panel
     dest: /home/{{ ansible_user }}/.config/lxpanel/LXDE/panels/panel
+  notify: 'restart desktop'

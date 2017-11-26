@@ -1,0 +1,7 @@
+---
+- name: Restart LightDM to have desktop setting updates take effect
+  service:
+    name: lightdm
+    state: restarted
+  become: yes
+  listen: 'restart desktop'
